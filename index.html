@@ -9,20 +9,26 @@
 
 <body>
   <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <h1>KnockoutJS Udemy tutorial</h1>
   
   <!-- knockout view -->
   <fieldset>
     <legend>KO - ViewModelTask</legend>
-    Task name: <input type="text" data-bind="value: viewModelTask.todo" style="width:240px"/>
+    Task name: <input type="text" data-bind="value: viewModelTask.todo" style="width:160px"/>
     <div data-bind="text: viewModelTask.completed"></div>
     <div data-bind="text: viewModelTask.createdDate"></div>
   </fieldset>
   <!-- knockout view ends -->
 
+</br>
+
   <!-- knockout view -->
   <fieldset>
     <legend>KO - PersonModel</legend>
+
+    First Name: <input type="text" data-bind="value: viewModelPerson.firstName" style="width:160px"/>
+    Last Name: <input type="text" data-bind="value: viewModelPerson.lastName" style="width:160px"/>
+
     <table>
       <tr>
         <th>ID</th>
@@ -37,6 +43,20 @@
         <td data-bind="text: viewModelPerson.age"></td>
       </tr>
     </table>
+  </fieldset>
+  <!-- knockout view ends -->
+
+</br>
+  
+  <!-- knockout view -->
+  <fieldset>
+    <legend>KO - ViewModelComputedPropPerson</legend>
+    First Name: <input type="text" data-bind="value: firstName"/>
+    Last Name: <input type="text" data-bind="value: lastName"/>
+    </br>
+      <div>Full Name: <span data-bind="text: fullName"/></div>
+    </br>
+    Full Name: <input type="text" data-bind="value: fullName"/>
   </fieldset>
   <!-- knockout view ends -->
 
