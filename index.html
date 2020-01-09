@@ -94,7 +94,10 @@
       <select multiple data-bind="value:selectedItem, options:items" 
               style="height:150px"></select>
       <p>Selected item: <span data-bind="text:selectedItem"/></p>
-      <button data-bind="click: removeItem, enable: selectedItem() != ''">Remove selected Item</button>
+      
+      <div data-bind="if: selectedItem">
+        <button data-bind="click: removeItem">Remove selected Item</button>
+      </div>
     </form>
   </fieldset>
 </div>
