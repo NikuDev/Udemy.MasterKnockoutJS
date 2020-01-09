@@ -27,7 +27,20 @@ var viewModelComputedPropPerson = function()
 			this.firstName(fullName[0]);
 			this.lastName(fullName[1]);
 		}
-	});
+	}),
+	age= ko.computed({
+		read: function(){
+			return 18;
+		},
+		// write: function(val){ } // <- will make IsWriteableObservable return true;
+	})
+
+	// a few flags can indicate the functionality of props
+	console.log('ko.IsComputed(this.firstName)' + ko.isComputed(this.firstName));
+	console.log('ko.IsComputed(this.fullName)' + ko.isComputed(this.fullName));
+	console.log('ko.IsWriteableObservable(this.firstName)' + ko.isWriteableObservable(this.firstName));
+	console.log('ko.IsWriteableObservable(this.fullName)' + ko.isWriteableObservable(this.fullName));
+	console.log('ko.IsWriteableObservable(this.age)' + ko.isWriteableObservable(this.age));
 }
 
 ko.applyBindings(viewModelComputedPropPerson);
