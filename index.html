@@ -11,7 +11,8 @@
   <!-- Add your site or application content here -->
   <h1>KnockoutJS Udemy tutorial</h1>
   
-  <button onclick="toggleVisibility('div_viewmodeltask')">
+  <button onclick="toggleVisibility('div_viewmodeltask')"
+  style="margin: 10px">
     KO - viewModelTask
   </button>
   <!-- knockout view -->  
@@ -27,7 +28,8 @@
 
 </br></br>
 
-  <button onclick="toggleVisibility('div_viewmodelperson')">
+  <button onclick="toggleVisibility('div_viewmodelperson')"
+  style="margin: 10px">
     KO - viewModelPerson
   </button>
   <!-- knockout view -->
@@ -58,7 +60,8 @@
 
 </br></br>
 
-  <button onclick="toggleVisibility('div_viewmodelcomputedpropperson')">
+  <button onclick="toggleVisibility('div_viewmodelcomputedpropperson')"
+  style="margin: 10px">
     KO - computed property
   </button>
     <!-- knockout view -->
@@ -68,26 +71,41 @@
         First Name: <input type="text" data-bind="value: firstName"/>
         Last Name: <input type="text" data-bind="value: lastName"/>
       </br>
-      <div>Full Name: <span data-bind="text: fullName"/></div>
-    </br>
-    Full Name: <input type="text" data-bind="value: fullName"/>
-    </fieldset>
-  </div>
+      <div>Full Name: <span data-bind="text: fullName"></div>
+      </br>
+      Full Name: <input type="text" data-bind="value: fullName"/>
+      </fieldset>
+    </div>
 <!-- knockout view ends -->
 </br></br>
 
-
+<!-- knockout view -->
+<div id="div_observableArrays">
+  <fieldset>
+    <legend>KO - Observable Arrays</legend>
+    <form data-bind="submit:actionOnSubmit">
+      Item to add: <input type="text" data-bind="value: itemToAdd, valueUpdate:'afterkeydown'"/>
+      <!-- client validation is not a good idea, but ko also provides means to enable/disable elements -->
+      <input type="submit" 
+             value="Add items"
+             data-bind="enable: itemToAdd().length > 0"/>
+    </br>
+      <p>Available items:</p>
+      <select multiple data-bind="options:items" style="height:150px"></select>
+    </form>
+  </fieldset>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type='text/javascript'></script>
 <script src="app.js" type='text/javascript'></script>
 <script type='text/javascript'>
     function toggleVisibility(val) {
-      var x = document.getElementById(val);
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
+        var x = document.getElementById(val);
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
       }
   </script>
 </body>
