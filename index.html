@@ -91,7 +91,10 @@
              data-bind="enable: itemToAdd().length > 0"/>
     </br>
       <p>Available items:</p>
-      <select multiple data-bind="options:items" style="height:150px"></select>
+      <select multiple data-bind="value:selectedItem, options:items" 
+              style="height:150px"></select>
+      <p>Selected item: <span data-bind="text:selectedItem"/></p>
+      <button data-bind="click: removeItem, enable: selectedItem() != ''">Remove selected Item</button>
     </form>
   </fieldset>
 </div>

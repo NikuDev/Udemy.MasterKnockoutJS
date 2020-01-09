@@ -53,14 +53,24 @@ ko.applyBindings(
 
 // OBSERVABLE ARRAYS
 var listModel = function(items){
+
 	this.items = ko.observableArray(items);
 	this.itemToAdd = ko.observable("");
+	this.selectedItem = ko.observable();
+
 	actionOnSubmit = function(){
 		// add item to array
 		this.items.push(this.itemToAdd());
 		// clear itemToAdd
 		this.itemToAdd("");
 	}.bind(this); // <- ?
+
+	removeItem = function(){
+		const index = this.items().indexOf(this.selectedItem());
+		if (index > -1) {
+			this.items.splice(index, 1);
+		}
+	} // no binding, still functions?
 }
 
 ko.applyBindings(
