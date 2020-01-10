@@ -80,7 +80,11 @@
 </br></br>
 
 <!-- knockout view -->
-<div id="div_observableArrays">
+<button onclick="toggleVisibility('div_observableArrays')"
+style="margin: 10px">
+  KO - observable arrays
+</button>
+<div id="div_observableArrays" style="display: none">
   <fieldset>
     <legend>KO - Observable Arrays</legend>
     <form data-bind="submit:actionOnSubmit">
@@ -99,6 +103,58 @@
         <button data-bind="click: removeItem">Remove selected Item</button>
       </div>
     </form>
+  </fieldset>
+</div>
+<!-- knockout view ends -->
+</br></br>
+
+<!-- knockout view -->
+<button onclick="toggleVisibility('div_visibility')"
+        style="margin: 10px">
+  KO - visibility triggers
+</button>
+<div id="div_visibility" style="display: none">
+  <fieldset>
+    <legend>KO - Visibility</legend>
+    <table>
+      <!-- flag trigger -->
+      <tr>
+        <td>
+          <button data-bind="click: toggleFlag">Toggle flag</button>
+        </td>
+        <td>
+          <span data-bind="visible: hasFlagSet">flag is set to true</span>
+        </td>
+      </tr>
+      <!-- array size trigger -->
+      <tr>
+        <td>
+          <button data-bind="click: addItemToArray">Add item to array</button>
+        </td>
+        <td>
+          <span data-bind="visible: items().length > 0, text: items().length"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" data-bind="value: grade"/>
+        </td>
+        <td>
+          <!-- the style binding can also apply to css classes/id's instead of inline-styling -->
+          <span data-bind="style: { color: grade() < 50 ? 'red' : 'green' }">Grade rating</span>
+        </td>
+      </tr>
+      <!-- html and attr binding -->
+      <tr>
+        <td>
+          <span>attr binding:</span>
+        </td>
+        <td>
+          <span data-bind="html: details"></span>
+          <a data-bind="attr: { href: url, title: details }">Click here</a>
+        </td>
+      </tr>
+    </table>
   </fieldset>
 </div>
 

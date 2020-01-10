@@ -78,6 +78,30 @@ ko.applyBindings(
 	document.getElementById("div_observableArrays")
 );
 
+// VISIBILITY
+var viewModelVisibility = function(){
+	this.hasFlagSet = ko.observable(false);
+	this.items = ko.observableArray(); // new array
+
+	// style binding
+	this.grade = ko.observable(100);
+
+	// attr binding
+	this.url = ko.observable("https://www.google.com");
+	this.details = ko.observable("Google");
+
+	toggleFlag = function(){
+		this.hasFlagSet(!this.hasFlagSet());
+	}.bind(this);
+
+	addItemToArray = function(){
+		this.items.push("new item");
+	}.bind(this);
+}
+
+ko.applyBindings(viewModelVisibility, document.getElementById("div_visibility"));
+
+
 // 2 seconds after the document loaded the name will be changed
 // (and automatically updated in the view due to knockout)
 setTimeout(function() {
