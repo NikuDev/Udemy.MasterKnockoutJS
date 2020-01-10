@@ -26,7 +26,7 @@
   </div>
   <!-- knockout view ends -->
 
-</br></br>
+</br>
 
   <button onclick="toggleVisibility('div_viewmodelperson')"
   style="margin: 10px">
@@ -58,7 +58,7 @@
   </div>
   <!-- knockout view ends -->
 
-</br></br>
+</br>
 
   <button onclick="toggleVisibility('div_viewmodelcomputedpropperson')"
   style="margin: 10px">
@@ -76,91 +76,188 @@
       Full Name: <input type="text" data-bind="value: fullName"/>
       </fieldset>
     </div>
-<!-- knockout view ends -->
-</br></br>
 
-<!-- knockout view -->
-<button onclick="toggleVisibility('div_observableArrays')"
-style="margin: 10px">
-  KO - observable arrays
-</button>
-<div id="div_observableArrays" style="display: none">
-  <fieldset>
-    <legend>KO - Observable Arrays</legend>
-    <form data-bind="submit:actionOnSubmit">
-      Item to add: <input type="text" data-bind="value: itemToAdd, valueUpdate:'afterkeydown'"/>
-      <!-- client validation is not a good idea, but ko also provides means to enable/disable elements -->
-      <input type="submit" 
-             value="Add items"
-             data-bind="enable: itemToAdd().length > 0"/>
-    </br>
-      <p>Available items:</p>
-      <select multiple data-bind="value:selectedItem, options:items" 
-              style="height:150px"></select>
-      <p>Selected item: <span data-bind="text:selectedItem"/></p>
+<!-- knockout view ends -->
+</br>
+
+  <!-- knockout view -->
+  <button onclick="toggleVisibility('div_observableArrays')"
+  style="margin: 10px">
+    KO - observable arrays
+  </button>
+  <div id="div_observableArrays" style="display: none">
+    <fieldset>
+      <legend>KO - Observable Arrays</legend>
+      <form data-bind="submit:actionOnSubmit">
+        Item to add: <input type="text" data-bind="value: itemToAdd, valueUpdate:'afterkeydown'"/>
+        <!-- client validation is not a good idea, but ko also provides means to enable/disable elements -->
+        <input type="submit" 
+              value="Add items"
+              data-bind="enable: itemToAdd().length > 0"/>
+      </br>
+        <p>Available items:</p>
+        <select multiple data-bind="value:selectedItem, options:items" 
+                style="height:150px"></select>
+        <p>Selected item: <span data-bind="text:selectedItem"/></p>
+        
+        <div data-bind="if: selectedItem">
+          <button data-bind="click: removeItem">Remove selected Item</button>
+        </div>
+      </form>
+    </fieldset>
+  </div>
+<!-- knockout view ends -->
+</br>
+
+  <!-- knockout view -->
+  <button onclick="toggleVisibility('div_visibility')"
+          style="margin: 10px">
+    KO - visibility triggers
+  </button>
+  <div id="div_visibility" style="display: none">
+    <fieldset>
+      <legend>KO - Visibility</legend>
+      <table>
+        <!-- flag trigger -->
+        <tr>
+          <td>
+            <button data-bind="click: toggleFlag">Toggle flag</button>
+          </td>
+          <td>
+            <span data-bind="visible: hasFlagSet">flag is set to true</span>
+          </td>
+        </tr>
+        <!-- array size trigger -->
+        <tr>
+          <td>
+            <button data-bind="click: addItemToArray">Add item to array</button>
+          </td>
+          <td>
+            <span data-bind="visible: items().length > 0, text: items().length"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" data-bind="value: grade"/>
+          </td>
+          <td>
+            <!-- the style binding can also apply to css classes/id's instead of inline-styling -->
+            <span data-bind="style: { color: grade() < 50 ? 'red' : 'green' }">Grade rating</span>
+          </td>
+        </tr>
+        <!-- html and attr binding -->
+        <tr>
+          <td>
+            <span>attr binding:</span>
+          </td>
+          <td>
+            <span data-bind="html: details"></span>
+            <a data-bind="attr: { href: url, title: details }">Click here</a>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+  </div>
+  <!-- knockout view ends -->
+  </br>
+
+  <button onclick="toggleVisibility('div_operators')"
+          style="margin: 10px">
+    KO - Operators
+  </button>
+  <div id="div_operators" style="display: none;">
+    <fieldset>
+      <legend>KO - Operators</legend>
       
-      <div data-bind="if: selectedItem">
-        <button data-bind="click: removeItem">Remove selected Item</button>
+      <label><input type="checkbox" data-bind="checked: isShowTableChecked" />Display table</label>
+      <!-- alternative for 'data-bind=visibility...' is 'if:' so the <div> doesn't get rendered at all when false-->
+      <div data-bind="if: isShowTableChecked">
+        <!-- 1d array -->
+        <table>
+          <strong>Foreach 1d array</strong>
+          <ul data-bind="foreach: months">
+            <li data-bind="text: $data"></li>
+          </ul>
+        </table>
+        <!-- 2d array -->
+        <table>
+        </br>
+          <strong>Foreach 2d array</strong>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+          </tr>
+          <tbody data-bind="foreach: persons">
+            <td data-bind="text: name"/>
+            <!-- '$data' is a reserver ko identifier for the current item, but redundant if you'd like to specify the property -->
+            <!-- <td data-bind="text: $data.name"/> -->
+            <td data-bind="text: age"/>
+            <!-- '$data' is a reserver ko identifier for the current item, but redundant if you'd like to specify the property -->
+            <!-- <td data-bind="text: $data.age"/> -->
+          </tbody>
+        </table>
+        <!-- combining 2 arrays from the same model -->
+        <table>
+        </br>
+          <strong>Combining multiple arrays from the same model</strong>
+          <tbody data-bind="foreach: months">
+            <!-- we are looping through the 'months' collection -->
+            <td>
+              The month with index 
+              <b data-bind="text: $index"></b>
+              is
+              <b data-bind="text: $data"></b>
+              and the person with this index is 
+              <!-- <b data-bind="text: $parent.persons[$index]"></b> -->
+            </td>
+          </tbody>
+        </table>
+        <!-- foreach without 'data-bind' -->
+        <table>
+        </br>
+          <strong>foreach without 'data-bind'</strong>
+          <ul>
+            <!-- ko foreach: fruits -->
+            <li><b data-bind="text: $data"></b></li>
+            <!-- /ko -->
+          </ul>
+        </table>
+        <!-- foreach with 'ifnot' -->
+        <table>
+        </br>
+          <strong>foreach with 'ifnot'</strong>
+          <ul>
+            <!-- ko foreach: fruits -->
+            <div data-bind="ifnot: $data == 'Apple'">
+              <li><b data-bind="text: $data"></b></li>
+            </div>
+            <!-- /ko -->
+          </ul>
+        </table>
       </div>
-    </form>
-  </fieldset>
-</div>
-<!-- knockout view ends -->
-</br></br>
+    </fieldset>
+  </div>
+</br>
 
-<!-- knockout view -->
-<button onclick="toggleVisibility('div_visibility')"
-        style="margin: 10px">
-  KO - visibility triggers
-</button>
-<div id="div_visibility" style="display: none">
-  <fieldset>
-    <legend>KO - Visibility</legend>
-    <table>
-      <!-- flag trigger -->
-      <tr>
-        <td>
-          <button data-bind="click: toggleFlag">Toggle flag</button>
-        </td>
-        <td>
-          <span data-bind="visible: hasFlagSet">flag is set to true</span>
-        </td>
-      </tr>
-      <!-- array size trigger -->
-      <tr>
-        <td>
-          <button data-bind="click: addItemToArray">Add item to array</button>
-        </td>
-        <td>
-          <span data-bind="visible: items().length > 0, text: items().length"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" data-bind="value: grade"/>
-        </td>
-        <td>
-          <!-- the style binding can also apply to css classes/id's instead of inline-styling -->
-          <span data-bind="style: { color: grade() < 50 ? 'red' : 'green' }">Grade rating</span>
-        </td>
-      </tr>
-      <!-- html and attr binding -->
-      <tr>
-        <td>
-          <span>attr binding:</span>
-        </td>
-        <td>
-          <span data-bind="html: details"></span>
-          <a data-bind="attr: { href: url, title: details }">Click here</a>
-        </td>
-      </tr>
-    </table>
-  </fieldset>
-</div>
+  <button onclick="toggleVisibility('div_childWithParents')"
+    style="margin: 10px">
+    KO - With
+  </button>
+  <div id="div_childWithParents">
+    <fieldset>
+      <legend>KO - With</legend>
+      <h1>Child: <span data-bind="text: child"/></h1>
+      <!-- using with to simplify identification of hierarchial properties -->
+      <p data-bind="with: parents">
+        Mom: <b data-bind="text: mom"></b>
+        Dad: <b data-bind="text: dad"></b>
+      </p>
+    </fieldset>
+  </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type='text/javascript'></script>
-<script src="app.js" type='text/javascript'></script>
-<script type='text/javascript'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type='text/javascript'></script>
+  <script src="app.js" type='text/javascript'></script>
+  <script type='text/javascript'>
     function toggleVisibility(val) {
         var x = document.getElementById(val);
         if (x.style.display === "none") {

@@ -63,14 +63,14 @@ var listModel = function(items){
 		this.items.push(this.itemToAdd());
 		// clear itemToAdd
 		this.itemToAdd("");
-	}.bind(this); // <- ?
+	}.bind(this); // TODO: <- ?
 
 	removeItem = function(){
 		const index = this.items().indexOf(this.selectedItem());
 		if (index > -1) {
 			this.items.splice(index, 1);
 		}
-	} // no binding, still functions?
+	} // TODO: no binding, still functions?
 }
 
 ko.applyBindings(
@@ -100,6 +100,52 @@ var viewModelVisibility = function(){
 }
 
 ko.applyBindings(viewModelVisibility, document.getElementById("div_visibility"));
+
+// CONDITIONAL OPERATORS
+class studentModel {
+	constructor(){
+		name: ko.observable();
+		age: ko.observable();
+	}
+}
+
+var viewModelOperators = function(){
+	this.isShowTableChecked = ko.observable(false);
+
+	this.months = ko.observableArray([
+		"January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November", "December"
+	]);
+	
+	this.persons = ko.observableArray([ 
+		{ name: 'Peter Parker', age: 25 },
+		{ name: 'Bruce Wayne', age: 24 },
+		{ name: 'Arthur Fleck', age: 30 }
+	]);
+
+	this.fruits = ko.observableArray([
+		"Apple", "Banana", "Orange"
+	]);
+
+	// this.persons = ko.observableArray();
+	// persons().push(new studentModel(name = "Bruce Wayne", age = 24));
+	// persons().push(new studentModel(name = "Peter Parker", age = 25));
+	// persons().push(new studentModel(name = "Arthur Fleck", age = 30));
+	// // TODO: foreach only shows last entry?
+}
+
+ko.applyBindings(viewModelOperators, document.getElementById("div_operators"));
+
+// WITH
+var childWithParents = {
+	child: "Matt",
+	parents: {
+		mom: "Kimberly",
+		dad: "John"
+	}
+}
+
+ko.applyBindings(childWithParents, document.getElementById("div_childWithParents"));
 
 
 // 2 seconds after the document loaded the name will be changed
